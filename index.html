@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>اشترك الآن — لُقمة دايت</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════
+   ROOT & RESET
+══════════════════════════════ */
+:root {
+  --olive:      #4a6741;
+  --olive2:     #5c7a52;
+  --olive3:     #7a9e6e;
+  --olive-pale: #eef4eb;
+  --cream:      #f0ead8;
+  --cream-d:    #e0d5bc;
+  --gold:       #c8a96e;
+  --goldf:      #dfc28e;
+  --gold-soft:  #faf4e8;
+  --dark:       #1e1e1e;
+  --text:       #2c2c2c;
+  --muted:      #7a7060;
+  --border:     #ddd5c0;
+  --white:      #ffffff;
+  --wa:         #25D366;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo', sans-serif;
+  background: #f2ede3;
+  color: var(--text);
+  direction: rtl;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════
+   WHATSAPP FLOAT BUTTON
+══════════════════════════════ */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  left: 20px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.wa-btn {
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: var(--wa);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: wa-pulse 2.5s ease-in-out infinite;
+}
+.wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+.wa-btn svg { width: 30px; height: 30px; fill: white; }
+.wa-label {
+  background: var(--dark);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+@keyframes wa-pulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+  50%      { box-shadow: 0 4px 28px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.12); }
+}
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+.hero {
+  background: linear-gradient(150deg, #2d4029 0%, #4a6741 55%, #5c7a52 100%);
+  padding: 52px 20px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-deco-num {
+  position: absolute;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 260px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  bottom: -40px; left: -20px;
+  line-height: 1; direction: ltr;
+  pointer-events: none;
+}
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.05);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  direction: ltr;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.hero-title {
+  font-size: 42px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s 0.15s ease, transform 0.6s 0.15s ease;
+}
+.hero-title span { color: var(--goldf); }
+.hero-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s 0.3s ease, transform 0.6s 0.3s ease;
+}
+.hero-badges {
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s 0.45s ease, transform 0.6s 0.45s ease;
+}
+.h-badge {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.85);
+  font-size: 11px; font-weight: 700;
+  padding: 5px 14px; border-radius: 20px;
+}
+.h-badge.gold { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+.hero.loaded .hero-eyebrow,
+.hero.loaded .hero-title,
+.hero.loaded .hero-sub,
+.hero.loaded .hero-badges { opacity:1; transform: none; }
+
+/* ══════════════════════════════
+   SECTION WRAPPER
+══════════════════════════════ */
+.section { padding: 32px 16px; }
+.section-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+}
+.section-title {
+  font-size: 20px; font-weight: 900; color: var(--olive);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--olive-pale);
+}
+
+/* ══════════════════════════════
+   STEP INDICATOR
+══════════════════════════════ */
+.steps {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin-bottom: 28px; padding: 0 8px;
+}
+.step-item {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  flex: 1;
+  position: relative;
+}
+.step-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 14px; left: -50%;
+  width: 100%; height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.step-item.done:not(:last-child)::after { background: var(--olive); }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--border); color: var(--muted);
+  font-size: 11px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+  transition: all 0.3s;
+}
+.step-item.active .step-num { background: var(--olive); color: white; }
+.step-item.done .step-num { background: var(--gold); color: var(--dark); }
+.step-lbl { font-size: 10px; font-weight: 700; color: var(--muted); text-align: center; }
+.step-item.active .step-lbl { color: var(--olive); }
+.step-item.done .step-lbl { color: var(--gold); }
+
+/* ══════════════════════════════
+   TOGGLE — TYPE
+══════════════════════════════ */
+.type-toggle {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+.type-btn {
+  padding: 16px 12px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: white;
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.22s;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.type-btn .t-icon { font-size: 28px; }
+.type-btn .t-sub { font-size: 10px; font-weight: 300; color: var(--muted); }
+.type-btn.active {
+  border-color: var(--olive);
+  background: var(--olive-pale);
+  color: var(--olive);
+}
+.type-btn.active .t-sub { color: var(--olive2); }
+
+/* ══════════════════════════════
+   DURATION TOGGLE
+══════════════════════════════ */
+.dur-toggle {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 24px;
+}
+.dur-btn {
+  padding: 13px 10px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  background: white;
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px; font-weight: 800;
+  color: var(--muted);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.22s;
+}
+.dur-btn .d-sub { font-size: 10px; font-weight: 300; display: block; margin-top: 2px; }
+.dur-btn.active {
+  border-color: var(--olive); background: var(--olive-pale); color: var(--olive);
+}
+
+/* ══════════════════════════════
+   PLAN CARDS
+══════════════════════════════ */
+.plans-grid {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-bottom: 16px;
+}
+
+.plan-card {
+  border-radius: 18px;
+  border: 2px solid var(--border);
+  background: white;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+}
+.plan-card.selected {
+  border-color: var(--olive);
+  box-shadow: 0 4px 20px rgba(74,103,65,0.18);
+}
+.plan-card.featured { border-color: var(--gold); }
+.plan-card.featured.selected {
+  border-color: var(--olive);
+  box-shadow: 0 4px 24px rgba(74,103,65,0.22);
+}
+
+.feat-badge {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--gold); color: var(--dark);
+  font-size: 9px; font-weight: 900;
+  padding: 3px 10px; border-radius: 20px;
+  z-index: 2;
+}
+.sel-check {
+  position: absolute; top: 12px; right: 12px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: white;
+  transition: all 0.2s; z-index: 2;
+}
+.plan-card.selected .sel-check { background: var(--olive); }
+
+.pc-top {
+  background: var(--olive);
+  padding: 18px 18px 14px;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.plan-card.featured .pc-top {
+  background: linear-gradient(130deg, #3a5533, var(--olive));
+}
+.pc-bg-num {
+  position: absolute; font-family: 'Montserrat', sans-serif;
+  font-size: 80px; font-weight: 900;
+  color: rgba(255,255,255,0.05);
+  bottom: -10px; left: 6px; line-height: 1; direction: ltr;
+}
+.pc-top-right { position: relative; z-index: 2; }
+.pc-meals-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 3px;
+}
+.pc-name { font-size: 18px; font-weight: 900; color: white; line-height: 1.1; }
+.pc-top-left { position: relative; z-index: 2; text-align: left; }
+.pc-price {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px; font-weight: 900;
+  color: var(--goldf); direction: ltr; line-height: 1;
+}
+.pc-sar { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.45); }
+.pc-daily { font-size: 10px; color: rgba(255,255,255,0.4); direction: ltr; margin-top: 2px; }
+
+.pc-body { padding: 14px 18px; display: flex; gap: 16px; align-items: flex-start; }
+.pc-perks { list-style: none; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.pc-perks li {
+  font-size: 12px; font-weight: 300; color: var(--text);
+  display: flex; align-items: center; gap: 7px;
+}
+.pc-perks li::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--olive3); flex-shrink: 0;
+}
+.plan-card.featured .pc-perks li::before { background: var(--gold); }
+.plan-card.selected .pc-perks li::before { background: var(--olive); }
+
+.pc-macro {
+  background: var(--olive-pale);
+  border-radius: 10px;
+  padding: 10px 12px;
+  text-align: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(74,103,65,0.1);
+}
+.pc-macro-val { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; color: var(--olive); direction: ltr; }
+.pc-macro-lbl { font-size: 9px; font-weight: 700; color: var(--muted); }
+
+/* delivery note on card */
+.pc-delivery {
+  margin: 0 18px 14px;
+  background: var(--gold-soft);
+  border: 1px solid var(--cream-d);
+  border-right: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px; font-weight: 300; color: var(--muted);
+}
+.pc-delivery strong { color: var(--olive); font-weight: 800; }
+
+/* ══════════════════════════════
+   EXTRA PROTEIN
+══════════════════════════════ */
+.protein-extra {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 18px;
+  margin-bottom: 20px;
+}
+.protein-title {
+  font-size: 13px; font-weight: 900; color: var(--olive);
+  margin-bottom: 4px;
+}
+.protein-desc {
+  font-size: 11.5px; font-weight: 300; color: var(--muted);
+  margin-bottom: 14px; line-height: 1.7;
+}
+.protein-counter {
+  display: flex; align-items: center; gap: 12px;
+}
+.cnt-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 2px solid var(--border);
+  background: white; font-size: 18px; font-weight: 700;
+  color: var(--olive); cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.cnt-btn:hover { background: var(--olive-pale); border-color: var(--olive); }
+.cnt-val {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px; font-weight: 900;
+  color: var(--olive); min-width: 28px; text-align: center;
+}
+.cnt-label { font-size: 11px; font-weight: 300; color: var(--muted); }
+.cnt-price {
+  margin-right: auto;
+  background: var(--gold-soft);
+  border: 1px solid var(--cream-d);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12px; font-weight: 900; color: var(--olive);
+  direction: ltr;
+}
+
+/* ══════════════════════════════
+   ORDER SUMMARY
+══════════════════════════════ */
+.summary-box {
+  background: var(--dark);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  display: none;
+}
+.summary-box.visible { display: block; }
+.sum-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 12px; }
+.sum-rows { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+.sum-row { display: flex; justify-content: space-between; align-items: center; }
+.sum-row-label { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.5); }
+.sum-row-val { font-size: 12px; font-weight: 700; color: white; }
+.sum-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 8px 0; }
+.sum-total-row { display: flex; justify-content: space-between; align-items: center; }
+.sum-total-lbl { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.7); }
+.sum-total-val {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px; font-weight: 900; color: var(--goldf); direction: ltr;
+}
+.sum-note { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.3); margin-top: 6px; text-align: left; direction: ltr; }
+
+/* ══════════════════════════════
+   CONTINUE BUTTON
+══════════════════════════════ */
+.btn-continue {
+  display: block; width: 100%;
+  padding: 16px; border-radius: 14px;
+  background: var(--olive); color: white;
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px; font-weight: 900;
+  border: none; cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(74,103,65,0.3);
+  opacity: 0.4; pointer-events: none;
+}
+.btn-continue.ready { opacity: 1; pointer-events: all; }
+.btn-continue:hover { background: var(--olive2); transform: translateY(-1px); }
+
+/* ══════════════════════════════
+   REGISTRATION FORM
+══════════════════════════════ */
+#formSection { display: none; }
+#formSection.visible { display: block; }
+
+.form-wrap {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.field-group { margin-bottom: 16px; }
+.field-label {
+  font-size: 12px; font-weight: 800; color: var(--olive);
+  margin-bottom: 6px; display: block;
+}
+.field-label span { color: #d44; font-size: 10px; }
+
+.field-input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px; font-weight: 400;
+  color: var(--text);
+  background: #fafaf8;
+  outline: none;
+  transition: border-color 0.2s;
+  direction: rtl;
+}
+.field-input:focus { border-color: var(--olive); background: white; }
+.field-input::placeholder { color: var(--muted); font-weight: 300; }
+
+.field-input[type="tel"],
+.field-input[type="email"],
+.field-input[type="number"] { direction: ltr; text-align: right; }
+
+/* calories selector */
+.cal-options {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
+}
+.cal-opt {
+  padding: 10px 6px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  background: white;
+  font-family: 'Cairo', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--muted);
+  cursor: pointer; text-align: center;
+  transition: all 0.2s;
+}
+.cal-opt.active { border-color: var(--olive); background: var(--olive-pale); color: var(--olive); }
+.cal-opt .cal-num { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 900; display: block; direction: ltr; }
+
+/* allergy checkboxes */
+.allergy-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+.allergy-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 12.5px; font-weight: 300; color: var(--text);
+}
+.allergy-item input { display: none; }
+.allergy-item .a-check {
+  width: 18px; height: 18px; border-radius: 5px;
+  border: 2px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: white; transition: all 0.2s;
+}
+.allergy-item.checked { border-color: var(--olive); background: var(--olive-pale); }
+.allergy-item.checked .a-check { background: var(--olive); border-color: var(--olive); }
+.allergy-other { margin-top: 8px; }
+
+/* form summary */
+.form-summary {
+  background: var(--olive-pale);
+  border: 1px solid rgba(74,103,65,0.15);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.fs-title { font-size: 12px; font-weight: 900; color: var(--olive); margin-bottom: 10px; }
+.fs-rows { display: flex; flex-direction: column; gap: 5px; }
+.fs-row { display: flex; justify-content: space-between; }
+.fs-lbl { font-size: 11.5px; font-weight: 300; color: var(--muted); }
+.fs-val { font-size: 11.5px; font-weight: 700; color: var(--text); }
+
+/* submit btn */
+.btn-submit {
+  display: block; width: 100%;
+  padding: 17px; border-radius: 14px;
+  background: var(--gold); color: var(--dark);
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px; font-weight: 900;
+  border: none; cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  box-shadow: 0 4px 18px rgba(200,169,110,0.35);
+  margin-bottom: 12px;
+}
+.btn-submit:hover { background: #b8962a; transform: translateY(-1px); }
+.btn-back {
+  display: block; width: 100%;
+  padding: 12px;
+  background: none; border: 2px solid var(--border);
+  border-radius: 12px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--muted); cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-back:hover { border-color: var(--olive); color: var(--olive); }
+
+/* ══════════════════════════════
+   SUCCESS SCREEN
+══════════════════════════════ */
+#successSection { display: none; text-align: center; }
+#successSection.visible { display: block; }
+
+.success-wrap {
+  background: white; border-radius: 20px;
+  padding: 44px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.success-icon { font-size: 64px; margin-bottom: 16px; animation: pop 0.5s ease; }
+@keyframes pop { 0%{transform:scale(0)} 70%{transform:scale(1.15)} 100%{transform:scale(1)} }
+.success-title { font-size: 26px; font-weight: 900; color: var(--olive); margin-bottom: 8px; }
+.success-sub { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+.success-wa {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--wa); color: white;
+  padding: 15px 24px; border-radius: 14px;
+  text-decoration: none;
+  font-size: 15px; font-weight: 800;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+.success-wa:hover { background: #1fb855; transform: translateY(-1px); }
+.success-wa svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+.footer {
+  background: var(--dark);
+  padding: 20px 20px;
+  text-align: center;
+  margin-top: 8px;
+}
+.footer p { font-size: 11px; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.8; }
+
+/* ══════════════════════════════
+   UTILITY
+══════════════════════════════ */
+.hidden { display: none !important; }
+.fade-in { animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+
+/* ══════════════════════════════
+   GOOGLE FORM IFRAME
+══════════════════════════════ */
+.gform-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.gform-wrap iframe {
+  width: 100%; border: none; display: block;
+  min-height: 900px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ WHATSAPP FLOAT ══ -->
+<a class="wa-float" href="https://wa.me/966557269256" target="_blank" aria-label="تواصل واتساب">
+  <div class="wa-btn">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </div>
+  <div class="wa-label">واتساب مباشر</div>
+</a>
+
+<!-- ══ HERO ══ -->
+<div class="hero" id="hero">
+  <div class="hero-deco-num">26</div>
+  <div class="hero-circle" style="width:400px;height:400px;top:-160px;right:-140px;"></div>
+  <div class="hero-circle" style="width:200px;height:200px;bottom:-80px;left:-60px;border-width:30px;"></div>
+  <div class="hero-eyebrow">LOQMA DIET · لُقمة دايت · الخرج</div>
+  <div class="hero-title">اشتراكك الصحي<br><span>يبدأ من هنا</span></div>
+  <div class="hero-sub">وجبات طازجة محسوبة الماكروز<br>توصيل يومي لبابك في الخرج</div>
+  <div class="hero-badges">
+    <span class="h-badge">🐔 دجاج</span>
+    <span class="h-badge">🥩 منوعة</span>
+    <span class="h-badge">٢٦ · ٣٠ يوم</span>
+    <span class="h-badge gold">من ٤٤٠ ر.س</span>
+  </div>
+</div>
+
+<!-- ══ PLAN SELECTION ══ -->
+<div class="section" id="planSection">
+
+  <!-- steps -->
+  <div class="steps">
+    <div class="step-item active" id="step1">
+      <div class="step-num">١</div>
+      <div class="step-lbl">اختر باقتك</div>
+    </div>
+    <div class="step-item" id="step2">
+      <div class="step-num">٢</div>
+      <div class="step-lbl">بياناتك</div>
+    </div>
+    <div class="step-item" id="step3">
+      <div class="step-num">٣</div>
+      <div class="step-lbl">تأكيد</div>
+    </div>
+  </div>
+
+  <!-- TYPE -->
+  <div class="section-label">نوع الوجبة</div>
+  <div class="type-toggle">
+    <button class="type-btn active" onclick="selectType('chicken',this)">
+      <span class="t-icon">🐔</span>
+      دجاج فقط
+      <span class="t-sub">وجبات دجاج متنوعة</span>
+    </button>
+    <button class="type-btn" onclick="selectType('mixed',this)">
+      <span class="t-icon">🥩</span>
+      منوعة
+      <span class="t-sub">لحم · سمك · دجاج</span>
+    </button>
+  </div>
+
+  <!-- DURATION -->
+  <div class="section-label">مدة الاشتراك</div>
+  <div class="dur-toggle">
+    <button class="dur-btn active" onclick="selectDur('26',this)">
+      ٢٦ يوم
+      <span class="d-sub">٢٦ وجبة للخيار الواحد</span>
+    </button>
+    <button class="dur-btn" onclick="selectDur('30',this)">
+      ٣٠ يوم
+      <span class="d-sub">٣٠ وجبة للخيار الواحد</span>
+    </button>
+  </div>
+
+  <!-- PLAN CARDS -->
+  <div class="section-label">عدد الوجبات اليومية</div>
+  <div class="plans-grid" id="plansGrid">
+    <!-- injected by JS -->
+  </div>
+
+  <!-- EXTRA PROTEIN -->
+  <div class="protein-extra">
+    <div class="protein-title">🥩 بروتين إضافي (اختياري)</div>
+    <div class="protein-desc">كل ٥٠ جرام بروتين إضافي = <strong>+٥ ر.س/شهر</strong> · الأساس: ١٥٠ جرام</div>
+    <div class="protein-counter">
+      <button class="cnt-btn" onclick="changeProtein(-1)">−</button>
+      <span class="cnt-val" id="proteinVal">0</span>
+      <span class="cnt-label">× ٥٠ جرام</span>
+      <div class="cnt-price" id="proteinPrice">+٠ ر.س</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-box" id="summaryBox">
+    <div class="sum-title">ملخص اختيارك</div>
+    <div class="sum-rows" id="sumRows"></div>
+    <hr class="sum-divider">
+    <div class="sum-total-row">
+      <div class="sum-total-lbl">الإجمالي الشهري</div>
+      <div class="sum-total-val" id="sumTotal">—</div>
+    </div>
+    <div class="sum-note">* لا يشمل التوصيل ١٠٠ ر.س/شهر</div>
+  </div>
+
+  <button class="btn-continue" id="btnContinue" onclick="goToForm()">
+    متابعة لتسجيل بياناتك ←
+  </button>
+</div>
+
+<!-- ══ REGISTRATION FORM ══ -->
+<div class="section" id="formSection">
+
+  <div class="steps">
+    <div class="step-item done" id="fstep1">
+      <div class="step-num">✓</div>
+      <div class="step-lbl">اخترت باقتك</div>
+    </div>
+    <div class="step-item active" id="fstep2">
+      <div class="step-num">٢</div>
+      <div class="step-lbl">بياناتك</div>
+    </div>
+    <div class="step-item" id="fstep3">
+      <div class="step-num">٣</div>
+      <div class="step-lbl">تأكيد</div>
+    </div>
+  </div>
+
+  <div class="form-summary" id="formSummary"></div>
+
+  <div class="form-wrap">
+
+    <!-- NAME -->
+    <div class="field-group">
+      <label class="field-label">الاسم الكامل <span>*</span></label>
+      <input class="field-input" type="text" id="f_name" placeholder="اكتب اسمك الكامل" required>
+    </div>
+
+    <!-- PHONE -->
+    <div class="field-group">
+      <label class="field-label">رقم الجوال <span>*</span></label>
+      <input class="field-input" type="tel" id="f_phone" placeholder="05xxxxxxxx" maxlength="10" required>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="field-group">
+      <label class="field-label">البريد الإلكتروني <span>*</span></label>
+      <input class="field-input" type="email" id="f_email" placeholder="example@email.com" required>
+    </div>
+
+    <!-- CALORIES -->
+    <div class="field-group">
+      <label class="field-label">عدد السعرات اليومية المستهدفة <span>*</span></label>
+      <div class="cal-options">
+        <div class="cal-opt" onclick="selectCal(1200,this)"><span class="cal-num">1200</span>خسارة وزن</div>
+        <div class="cal-opt" onclick="selectCal(1500,this)"><span class="cal-num">1500</span>معتدل</div>
+        <div class="cal-opt" onclick="selectCal(1800,this)"><span class="cal-num">1800</span>نشاط متوسط</div>
+        <div class="cal-opt" onclick="selectCal(2000,this)"><span class="cal-num">2000</span>نشاط عالي</div>
+        <div class="cal-opt" onclick="selectCal(2500,this)"><span class="cal-num">2500</span>بناء عضل</div>
+        <div class="cal-opt" onclick="selectCal('other',this)"><span class="cal-num">✏️</span>أخرى</div>
+      </div>
+      <input class="field-input hidden" type="number" id="f_cal_other" placeholder="اكتب عدد السعرات" style="margin-top:8px;">
+    </div>
+
+    <!-- ALLERGY -->
+    <div class="field-group">
+      <label class="field-label">هل تعاني من حساسية؟</label>
+      <div class="allergy-grid">
+        <label class="allergy-item" onclick="toggleAllergy(this)">
+          <input type="checkbox" value="لاكتوز"> <div class="a-check">✓</div> لاكتوز (ألبان)
+        </label>
+        <label class="allergy-item" onclick="toggleAllergy(this)">
+          <input type="checkbox" value="غلوتين"> <div class="a-check">✓</div> غلوتين (قمح)
+        </label>
+        <label class="allergy-item" onclick="toggleAllergy(this)">
+          <input type="checkbox" value="مكسرات"> <div class="a-check">✓</div> مكسرات
+        </label>
+        <label class="allergy-item" onclick="toggleAllergy(this)">
+          <input type="checkbox" value="بيض"> <div class="a-check">✓</div> بيض
+        </label>
+        <label class="allergy-item" onclick="toggleAllergy(this)">
+          <input type="checkbox" value="أسماك"> <div class="a-check">✓</div> أسماك
+        </label>
+        <label class="allergy-item" onclick="toggleAllergy(this)">
+          <input type="checkbox" value="لا يوجد"> <div class="a-check">✓</div> لا يوجد
+        </label>
+      </div>
+      <div class="allergy-other">
+        <input class="field-input" type="text" id="f_allergy_other" placeholder="حساسية أخرى (اختياري)">
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="field-group">
+      <label class="field-label">ملاحظات إضافية</label>
+      <textarea class="field-input" id="f_notes" rows="3" placeholder="أي تفاصيل إضافية تريد إضافتها..." style="resize:none;"></textarea>
+    </div>
+
+    <!-- FORM SUBMIT -->
+    <button class="btn-submit" onclick="submitForm()">
+      ✅ تأكيد الاشتراك
+    </button>
+    <button class="btn-back" onclick="goBack()">
+      ← العودة لاختيار الباقة
+    </button>
+  </div>
+</div>
+
+<!-- ══ SUCCESS ══ -->
+<div class="section" id="successSection">
+  <div class="success-wrap">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">تم استلام طلبك!</div>
+    <div class="success-sub">
+      شكراً لك — سيتواصل معك فريق لُقمة دايت خلال ٢٤ ساعة لتأكيد الاشتراك وترتيب التوصيل.
+    </div>
+    <a class="success-wa" href="https://wa.me/966557269256" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      تواصل معنا على واتساب
+    </a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="footer">
+  <p>لُقمة دايت · الخرج · ٢٠٢٦<br>📞 0557269256 · الأسعار لا تشمل التوصيل ١٠٠ ر.س/شهر</p>
+</div>
+
+<script>
+/* ══════════════════════════════
+   STATE
+══════════════════════════════ */
+const state = {
+  type: 'chicken',
+  dur: '26',
+  meals: null,     // 1,2,3
+  extraProtein: 0, // count × 50g
+  calories: null,
+  totalPrice: 0,
+};
+
+/* ── PRICES ── */
+const PRICES = {
+  chicken: { '26': [440,880,1320], '30': [510,1020,1520] },
+  mixed:   { '26': [470,940,1410], '30': [540,1080,1620] },
+};
+const NAMES = ['الخطوة الأولى','التحول الكامل','باقة الرياضي'];
+const MEALS_LABEL = ['وجبة واحدة / يوم','وجبتان / يوم','٣ وجبات / يوم'];
+const MEALS_COUNT = { '26': [26,52,78], '30': [30,60,90] };
+const DAILY = {
+  chicken: { '26': ['16.9','33.8','50.8'], '30': ['17','34','50.7'] },
+  mixed:   { '26': ['18.1','36.2','54.2'], '30': ['18','36','54'] },
+};
+
+/* ══ HERO LOAD ══ */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('hero').classList.add('loaded'), 100);
+  renderCards();
+});
+
+/* ══ TYPE ══ */
+function selectType(t, el) {
+  state.type = t; state.meals = null;
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderCards(); updateSummary();
+}
+
+/* ══ DURATION ══ */
+function selectDur(d, el) {
+  state.dur = d; state.meals = null;
+  document.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderCards(); updateSummary();
+}
+
+/* ══ RENDER CARDS ══ */
+function renderCards() {
+  const prices = PRICES[state.type][state.dur];
+  const daily  = DAILY[state.type][state.dur];
+  const counts = MEALS_COUNT[state.dur];
+  const grid = document.getElementById('plansGrid');
+  grid.innerHTML = '';
+
+  [0,1,2].forEach(i => {
+    const isStar = i === 1;
+    const isSelected = state.meals === i+1;
+    const card = document.createElement('div');
+    card.className = 'plan-card fade-in' + (isStar ? ' featured' : '') + (isSelected ? ' selected' : '');
+    card.onclick = () => selectMeal(i+1);
+    card.innerHTML = `
+      ${isStar ? '<div class="feat-badge">⭐ الأكثر طلباً</div>' : ''}
+      <div class="sel-check">${isSelected ? '✓' : ''}</div>
+      <div class="pc-top">
+        <div class="pc-bg-num">${i+1}</div>
+        <div class="pc-top-right">
+          <div class="pc-meals-label">${MEALS_LABEL[i]}</div>
+          <div class="pc-name">${NAMES[i]}</div>
+        </div>
+        <div class="pc-top-left">
+          <div class="pc-price">${prices[i].toLocaleString()}</div>
+          <div class="pc-sar">ر.س / شهر</div>
+          <div class="pc-daily">≈ ${daily[i]} / يوم</div>
+        </div>
+      </div>
+      <div class="pc-body">
+        <ul class="pc-perks">
+          <li>${counts[i]} وجبة طوال الشهر</li>
+          <li>${state.type === 'chicken' ? 'دجاج متنوع' : 'لحم · سمك · دجاج'}</li>
+          <li>١٥٠ كارب · ١٥٠ بروتين</li>
+        </ul>
+        <div class="pc-macro">
+          <div class="pc-macro-val">150g</div>
+          <div class="pc-macro-lbl">بروتين</div>
+          <div style="margin-top:6px;">
+          <div class="pc-macro-val">150g</div>
+          <div class="pc-macro-lbl">كارب</div>
+          </div>
+        </div>
+      </div>
+      <div class="pc-delivery">🚗 التوصيل <strong>+١٠٠ ر.س</strong> شهرياً (غير مشمول)</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ══ SELECT MEAL ══ */
+function selectMeal(n) {
+  state.meals = n;
+  renderCards();
+  updateSummary();
+}
+
+/* ══ PROTEIN COUNTER ══ */
+function changeProtein(dir) {
+  state.extraProtein = Math.max(0, Math.min(10, state.extraProtein + dir));
+  document.getElementById('proteinVal').textContent = state.extraProtein;
+  document.getElementById('proteinPrice').textContent = '+' + (state.extraProtein * 5) + ' ر.س';
+  updateSummary();
+}
+
+/* ══ UPDATE SUMMARY ══ */
+function updateSummary() {
+  const btn = document.getElementById('btnContinue');
+  const box = document.getElementById('summaryBox');
+
+  if (!state.meals) {
+    btn.classList.remove('ready');
+    box.classList.remove('visible');
+    return;
+  }
+
+  const basePrice = PRICES[state.type][state.dur][state.meals - 1];
+  const proteinCost = state.extraProtein * 5;
+  state.totalPrice = basePrice + proteinCost;
+
+  const typeLabel = state.type === 'chicken' ? '🐔 دجاج فقط' : '🥩 منوعة';
+  const mealsLabel = MEALS_LABEL[state.meals - 1];
+  const extraLabel = state.extraProtein > 0 ? `+${state.extraProtein * 50}جم (${proteinCost} ر.س)` : 'لا يوجد';
+
+  document.getElementById('sumRows').innerHTML = `
+    <div class="sum-row"><span class="sum-row-label">النوع</span><span class="sum-row-val">${typeLabel}</span></div>
+    <div class="sum-row"><span class="sum-row-label">المدة</span><span class="sum-row-val">${state.dur} يوم</span></div>
+    <div class="sum-row"><span class="sum-row-label">الوجبات</span><span class="sum-row-val">${mealsLabel}</span></div>
+    <div class="sum-row"><span class="sum-row-label">بروتين إضافي</span><span class="sum-row-val">${extraLabel}</span></div>
+    <div class="sum-row"><span class="sum-row-label">التوصيل</span><span class="sum-row-val" style="color:var(--gold)">+١٠٠ ر.س</span></div>
+  `;
+  document.getElementById('sumTotal').textContent = state.totalPrice.toLocaleString() + ' ر.س';
+  box.classList.add('visible');
+  btn.classList.add('ready');
+}
+
+/* ══ GO TO FORM ══ */
+function goToForm() {
+  document.getElementById('planSection').style.display = 'none';
+  const fs = document.getElementById('formSection');
+  fs.classList.add('visible');
+  fs.classList.add('fade-in');
+
+  // fill form summary
+  const typeLabel = state.type === 'chicken' ? '🐔 دجاج فقط' : '🥩 منوعة';
+  document.getElementById('formSummary').innerHTML = `
+    <div class="fs-title">📋 ملخص اختيارك</div>
+    <div class="fs-rows">
+      <div class="fs-row"><span class="fs-lbl">الباقة</span><span class="fs-val">${typeLabel} · ${state.dur} يوم · ${MEALS_LABEL[state.meals-1]}</span></div>
+      <div class="fs-row"><span class="fs-lbl">السعر</span><span class="fs-val">${state.totalPrice.toLocaleString()} ر.س + ١٠٠ توصيل</span></div>
+      <div class="fs-row"><span class="fs-lbl">الماكروز</span><span class="fs-val">١٥٠ كارب · ${150 + state.extraProtein*50} بروتين</span></div>
+    </div>
+  `;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ══ GO BACK ══ */
+function goBack() {
+  document.getElementById('formSection').classList.remove('visible');
+  document.getElementById('planSection').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ══ CALORIES ══ */
+let selectedCal = null;
+function selectCal(val, el) {
+  document.querySelectorAll('.cal-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  const otherInput = document.getElementById('f_cal_other');
+  if (val === 'other') {
+    otherInput.classList.remove('hidden');
+    selectedCal = 'other';
+  } else {
+    otherInput.classList.add('hidden');
+    selectedCal = val;
+  }
+}
+
+/* ══ ALLERGY ══ */
+function toggleAllergy(el) {
+  el.classList.toggle('checked');
+  const cb = el.querySelector('input');
+  cb.checked = !cb.checked;
+}
+
+/* ══ SUBMIT ══ */
+async function submitForm() {
+  const name   = document.getElementById('f_name').value.trim();
+  const phone  = document.getElementById('f_phone').value.trim();
+  const email  = document.getElementById('f_email').value.trim();
+  const calOther = document.getElementById('f_cal_other').value;
+  const calories = selectedCal === 'other' ? calOther : selectedCal;
+  const notes  = document.getElementById('f_notes').value.trim();
+
+  if (!name || !phone || !email) {
+    alert('يرجى تعبئة الاسم والجوال والبريد الإلكتروني');
+    return;
+  }
+  if (!calories) {
+    alert('يرجى تحديد عدد السعرات اليومية');
+    return;
+  }
+
+  // gather allergies
+  const allergies = [...document.querySelectorAll('.allergy-item.checked input')]
+    .map(i => i.value).join(' - ');
+  const allergyOther = document.getElementById('f_allergy_other').value.trim();
+
+  // build data
+  const typeLabel  = state.type === 'chicken' ? 'دجاج فقط' : 'منوعة';
+  const mealsLabel = ['وجبة واحدة','وجبتان','٣ وجبات'][state.meals - 1];
+  const proteinTotal = 150 + state.extraProtein * 50;
+
+  // ── GOOGLE FORM SUBMIT ──
+  const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdXgrzeKTGURDx-GrREll9NntynBZfyxg4s79RsJQm9zg_Wwg/formResponse';
+  const formData = new FormData();
+  formData.append('entry.1747400184', name);
+  formData.append('entry.1481915127', phone);
+  formData.append('entry.1366783272', email);
+  formData.append('entry.1512420542', `${typeLabel} · ${state.dur} يوم · ${mealsLabel}`);
+  formData.append('entry.1144297064', `${state.totalPrice} ر.س + 100 توصيل`);
+  formData.append('entry.1081934186', calories);
+  formData.append('entry.648885457',  `${proteinTotal}g`);
+  formData.append('entry.902774767',  (allergies + (allergyOther ? ' - ' + allergyOther : '')) || 'لا يوجد');
+  formData.append('entry.1638342549', notes);
+
+  try {
+    await fetch(FORM_ACTION, { method: 'POST', body: formData, mode: 'no-cors' });
+  } catch(e) { /* no-cors will always "fail" but data is submitted */ }
+
+  // ── ALSO SEND WHATSAPP MESSAGE ──
+  const waMsg = encodeURIComponent(
+    `🌿 طلب اشتراك جديد — لُقمة دايت\n\n` +
+    `👤 الاسم: ${name}\n` +
+    `📱 الجوال: ${phone}\n` +
+    `📧 الإيميل: ${email}\n\n` +
+    `📦 الباقة: ${typeLabel} · ${state.dur} يوم · ${mealsLabel}\n` +
+    `💰 السعر: ${state.totalPrice} ر.س + 100 توصيل\n` +
+    `🔥 السعرات: ${calories}\n` +
+    `💪 البروتين: ${proteinTotal}g\n` +
+    `⚠️ الحساسية: ${(allergies + (allergyOther ? ' - '+allergyOther : '')) || 'لا يوجد'}\n` +
+    `📝 ملاحظات: ${notes || 'لا يوجد'}`
+  );
+
+  // show success
+  document.getElementById('formSection').classList.remove('visible');
+  const succ = document.getElementById('successSection');
+  succ.classList.add('visible');
+  succ.classList.add('fade-in');
+  succ.querySelector('.success-wa').href = `https://wa.me/966557269256?text=${waMsg}`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
