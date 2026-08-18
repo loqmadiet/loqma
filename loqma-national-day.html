@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>عروض اليوم الوطني — لُقمة دايت</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --olive:      #4a6741;
+  --olive2:     #5c7a52;
+  --olive3:     #7a9e6e;
+  --olive-pale: #eef4eb;
+  --cream:      #f0ead8;
+  --cream-d:    #e0d5bc;
+  --gold:       #c8a96e;
+  --goldf:      #dfc28e;
+  --gold-soft:  #faf4e8;
+  --dark:       #1e1e1e;
+  --text:       #2c2c2c;
+  --muted:      #7a7060;
+  --border:     #ddd5c0;
+  --white:      #ffffff;
+  --wa:         #25D366;
+  --green94:    #006C35; /* اللون الأخضر السعودي */
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo', sans-serif;
+  background: #0d1f0f;
+  color: var(--text);
+  direction: rtl;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ══ WHATSAPP FLOAT ══ */
+.wa-float {
+  position: fixed; bottom: 24px; left: 20px;
+  z-index: 999;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.wa-btn {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--wa);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  text-decoration: none;
+  animation: wa-pulse 2.5s ease-in-out infinite;
+}
+.wa-btn svg { width: 28px; height: 28px; fill: white; }
+.wa-label {
+  background: rgba(0,0,0,0.7);
+  color: white; font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+}
+@keyframes wa-pulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+  50%      { box-shadow: 0 4px 28px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.1); }
+}
+
+/* ══ HERO ══ */
+.hero {
+  background: linear-gradient(160deg, #0a1a0c 0%, #0d2410 40%, #006C35 100%);
+  padding: 56px 20px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* نخلة ديكورية */
+.hero-palm {
+  position: absolute;
+  font-size: 180px;
+  opacity: 0.04;
+  bottom: -20px; left: -20px;
+  pointer-events: none;
+  line-height: 1;
+}
+.hero-palm2 {
+  position: absolute;
+  font-size: 120px;
+  opacity: 0.04;
+  top: -10px; right: -10px;
+  pointer-events: none;
+  line-height: 1;
+  transform: scaleX(-1);
+}
+
+/* خلفية رقم ٩٦ */
+.hero-num94 {
+  position: absolute;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 320px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.025);
+  bottom: -60px; left: 50%;
+  transform: translateX(-50%);
+  line-height: 1; direction: ltr;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* شارة اليوم الوطني */
+.nd-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,108,53,0.4);
+  border: 1px solid rgba(0,108,53,0.6);
+  color: #5dcc8a;
+  font-size: 11px; font-weight: 700;
+  padding: 6px 16px; border-radius: 20px;
+  margin-bottom: 20px;
+  position: relative; z-index: 2;
+  opacity: 0; transform: translateY(10px);
+  transition: all 0.5s ease;
+}
+.nd-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #5dcc8a;
+  animation: blink 1.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-title {
+  font-size: 44px; font-weight: 900; color: white;
+  line-height: 1.05; margin-bottom: 12px;
+  position: relative; z-index: 2;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.6s 0.15s ease;
+}
+.hero-title .green { color: #5dcc8a; }
+.hero-title .gold  { color: var(--goldf); }
+
+.hero-sub {
+  font-size: 14px; font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.9; margin-bottom: 28px;
+  position: relative; z-index: 2;
+  opacity: 0; transform: translateY(14px);
+  transition: all 0.6s 0.3s ease;
+}
+
+/* عداد تنازلي */
+.countdown-wrap {
+  display: flex; justify-content: center; gap: 12px;
+  margin-bottom: 32px;
+  position: relative; z-index: 2;
+  opacity: 0; transform: translateY(12px);
+  transition: all 0.6s 0.45s ease;
+}
+.cd-unit {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 14px;
+  min-width: 64px;
+  text-align: center;
+}
+.cd-val {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px; font-weight: 900;
+  color: #5dcc8a; direction: ltr; line-height: 1;
+}
+.cd-lbl {
+  font-size: 10px; font-weight: 300;
+  color: rgba(255,255,255,0.35); margin-top: 3px;
+}
+.cd-sep {
+  font-size: 24px; font-weight: 900;
+  color: rgba(255,255,255,0.2);
+  align-self: center; margin-bottom: 14px;
+}
+
+.hero.loaded .nd-badge,
+.hero.loaded .hero-title,
+.hero.loaded .hero-sub,
+.hero.loaded .countdown-wrap { opacity:1; transform:none; }
+
+/* ══ FORM CARD ══ */
+.form-outer {
+  padding: 0 16px 48px;
+  margin-top: -24px;
+  position: relative; z-index: 5;
+  max-width: 500px;
+  margin-left: auto; margin-right: auto;
+}
+
+.form-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px 24px;
+  box-shadow: 0 16px 60px rgba(0,0,0,0.4);
+}
+
+.form-card-eyebrow {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px;
+}
+.form-card-title {
+  font-size: 22px; font-weight: 900; color: var(--olive);
+  margin-bottom: 6px; line-height: 1.2;
+}
+.form-card-sub {
+  font-size: 13px; font-weight: 300; color: var(--muted);
+  margin-bottom: 24px; line-height: 1.7;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* fields */
+.field-group { margin-bottom: 16px; }
+.field-label {
+  font-size: 12px; font-weight: 800; color: var(--olive);
+  margin-bottom: 6px; display: block;
+}
+.field-label .req { color: #c0392b; font-size: 10px; }
+.field-input {
+  width: 100%; padding: 13px 16px;
+  border: 2px solid var(--border); border-radius: 12px;
+  font-family: 'Cairo', sans-serif; font-size: 14px;
+  color: var(--text); background: #fafaf8;
+  outline: none; transition: border-color 0.2s;
+}
+.field-input:focus { border-color: var(--olive); background: white; }
+.field-input::placeholder { color: var(--muted); font-weight: 300; }
+.field-input[type="tel"] { direction: ltr; text-align: right; }
+
+/* interest options */
+.interest-grid {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.interest-item {
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.22s;
+  display: flex; align-items: center; gap: 12px;
+  background: white;
+  position: relative;
+}
+.interest-item.checked {
+  border-color: var(--olive);
+  background: var(--olive-pale);
+}
+.interest-check {
+  width: 22px; height: 22px; border-radius: 6px;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: white; flex-shrink: 0;
+  transition: all 0.2s;
+  background: white;
+}
+.interest-item.checked .interest-check {
+  background: var(--olive); border-color: var(--olive);
+}
+.interest-icon { font-size: 24px; flex-shrink: 0; }
+.interest-text {}
+.interest-name {
+  font-size: 14px; font-weight: 800; color: var(--text);
+  margin-bottom: 2px;
+}
+.interest-desc { font-size: 11.5px; font-weight: 300; color: var(--muted); }
+.interest-item.checked .interest-name { color: var(--olive); }
+
+/* submit */
+.btn-submit {
+  display: block; width: 100%;
+  padding: 16px; border-radius: 14px;
+  background: var(--green94); color: white;
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px; font-weight: 900;
+  border: none; cursor: pointer;
+  margin-top: 24px;
+  transition: all 0.22s;
+  box-shadow: 0 4px 20px rgba(0,108,53,0.35);
+  opacity: 0.4; pointer-events: none;
+  position: relative; overflow: hidden;
+}
+.btn-submit.ready { opacity: 1; pointer-events: all; }
+.btn-submit:hover { background: #005828; transform: translateY(-1px); }
+.btn-submit::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+.btn-submit.ready:hover::after { transform: translateX(100%); }
+
+/* privacy note */
+.privacy-note {
+  text-align: center; margin-top: 12px;
+  font-size: 11px; font-weight: 300; color: var(--muted);
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+
+/* ══ OFFER PREVIEW ══ */
+.offers-section {
+  max-width: 500px; margin: 0 auto;
+  padding: 0 16px 24px;
+}
+.offers-title {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-align: center; margin-bottom: 14px;
+}
+.offers-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 24px;
+}
+.offer-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 16px 14px;
+  text-align: center;
+}
+.offer-icon { font-size: 28px; margin-bottom: 8px; }
+.offer-title { font-size: 13px; font-weight: 800; color: white; margin-bottom: 4px; }
+.offer-desc { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.4); line-height: 1.6; }
+.offer-tag {
+  display: inline-block; margin-top: 8px;
+  background: rgba(0,108,53,0.3);
+  border: 1px solid rgba(93,204,138,0.3);
+  color: #5dcc8a;
+  font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px;
+}
+
+/* ══ SUCCESS ══ */
+#successScreen {
+  display: none;
+  min-height: 100vh;
+  align-items: center; justify-content: center;
+  padding: 32px 20px;
+  background: linear-gradient(160deg, #0a1a0c 0%, #0d2410 60%, #006C35 100%);
+}
+#successScreen.visible { display: flex; }
+.success-card {
+  background: white; border-radius: 24px;
+  padding: 44px 28px; text-align: center;
+  max-width: 420px; width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.success-flag { font-size: 56px; margin-bottom: 8px; animation: pop 0.5s ease; }
+.success-icon { font-size: 40px; margin-bottom: 16px; }
+@keyframes pop { 0%{transform:scale(0.5)} 70%{transform:scale(1.1)} 100%{transform:scale(1)} }
+.success-title { font-size: 24px; font-weight: 900; color: var(--green94); margin-bottom: 8px; }
+.success-sub { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
+.success-wa {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--wa); color: white;
+  padding: 14px 24px; border-radius: 14px;
+  text-decoration: none; font-size: 15px; font-weight: 800;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+  transition: all 0.2s;
+}
+.success-wa svg { width: 22px; height: 22px; fill: white; }
+.success-wa:hover { background: #1fb855; }
+
+/* ══ FOOTER ══ */
+.footer {
+  background: rgba(0,0,0,0.4);
+  padding: 20px; text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer p { font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 300; line-height: 1.8; }
+
+.fade-in { animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+
+<!-- ══ WHATSAPP FLOAT ══ -->
+<a class="wa-float" href="https://wa.me/966557269256" target="_blank">
+  <div class="wa-btn">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </div>
+  <div class="wa-label">واتساب مباشر</div>
+</a>
+
+<!-- ══ MAIN ══ -->
+<div id="mainScreen">
+
+  <!-- HERO -->
+  <div class="hero" id="hero">
+    <div class="hero-palm">🌴</div>
+    <div class="hero-palm2">🌴</div>
+    <div class="hero-num94">96</div>
+
+    <div class="nd-badge">
+      <div class="nd-dot"></div>
+      اليوم الوطني السعودي ٩٦
+    </div>
+
+    <div class="hero-title">
+      عروض حصرية<br>
+      <span class="green">قريباً</span> لكل <span class="gold">مشترك</span>
+    </div>
+
+    <div class="hero-sub">
+      سجّل اهتمامك الآن وكن أول من يحصل على<br>
+      عروض اليوم الوطني من لُقمة دايت
+    </div>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-wrap">
+      <div class="cd-unit">
+        <div class="cd-val" id="cd-days">00</div>
+        <div class="cd-lbl">يوم</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-val" id="cd-hours">00</div>
+        <div class="cd-lbl">ساعة</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-val" id="cd-mins">00</div>
+        <div class="cd-lbl">دقيقة</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-val" id="cd-secs">00</div>
+        <div class="cd-lbl">ثانية</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFER PREVIEW -->
+  <div class="offers-section">
+    <div class="offers-title">ماذا ينتظرك 👀</div>
+    <div class="offers-grid">
+      <div class="offer-card">
+        <div class="offer-icon">📦</div>
+        <div class="offer-title">عروض الاشتراك</div>
+        <div class="offer-desc">خصومات على باقات الاشتراك الشهري</div>
+        <div class="offer-tag">باقات ٢٦ و ٣٠ يوم</div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">🍽️</div>
+        <div class="offer-title">خصومات الوجبات</div>
+        <div class="offer-desc">أسعار خاصة على الوجبات المفردة</div>
+        <div class="offer-tag">ليوم واحد فقط</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-outer">
+    <div class="form-card">
+      <div class="form-card-eyebrow">قائمة الانتظار · اليوم الوطني ٩٦</div>
+      <div class="form-card-title">سجّل اهتمامك 🇸🇦</div>
+      <div class="form-card-sub">أخبرنا بما يهمك وسنرسل لك العرض المناسب فور إطلاقه</div>
+
+      <!-- NAME -->
+      <div class="field-group">
+        <label class="field-label">الاسم <span class="req">*</span></label>
+        <input class="field-input" type="text" id="f_name" placeholder="اكتب اسمك">
+      </div>
+
+      <!-- PHONE -->
+      <div class="field-group">
+        <label class="field-label">رقم الجوال <span class="req">*</span></label>
+        <input class="field-input" type="tel" id="f_phone" placeholder="05xxxxxxxx" maxlength="10">
+      </div>
+
+      <!-- INTEREST -->
+      <div class="field-group">
+        <label class="field-label">ما الذي يهمك؟ <span class="req">*</span> <span style="font-weight:300;color:var(--muted);">(يمكن اختيار كليهما)</span></label>
+        <div class="interest-grid">
+
+          <div class="interest-item" id="int-sub" onclick="toggleInterest('sub')">
+            <div class="interest-check" id="chk-sub">✓</div>
+            <div class="interest-icon">📦</div>
+            <div class="interest-text">
+              <div class="interest-name">عروض الاشتراك الشهري</div>
+              <div class="interest-desc">خصومات على باقات ٢٦ و ٣٠ يوم</div>
+            </div>
+          </div>
+
+          <div class="interest-item" id="int-meal" onclick="toggleInterest('meal')">
+            <div class="interest-check" id="chk-meal">✓</div>
+            <div class="interest-icon">🍽️</div>
+            <div class="interest-text">
+              <div class="interest-name">خصومات الوجبات المفردة</div>
+              <div class="interest-desc">أسعار خاصة ليوم اليوم الوطني</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="btn-submit" id="btnSubmit" onclick="submitForm()">
+        🇸🇦 سجّل في قائمة الانتظار
+      </button>
+      <div class="privacy-note">
+        🔒 بياناتك محفوظة ولن تُشارك مع أي جهة
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>لُقمة دايت · الخرج · اليوم الوطني ٩٦<br>📞 0557269256</p>
+  </div>
+
+</div><!-- /mainScreen -->
+
+<!-- ══ SUCCESS ══ -->
+<div id="successScreen">
+  <div class="success-card fade-in">
+    <div class="success-flag">🇸🇦</div>
+    <div class="success-icon">✅</div>
+    <div class="success-title">تم تسجيلك!</div>
+    <div class="success-sub">
+      شكراً لك — ستصلك رسالة على جوالك بمجرد إطلاق عروض اليوم الوطني من لُقمة دايت
+    </div>
+    <a class="success-wa" id="waLink" href="https://wa.me/966557269256" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      تواصل معنا على واتساب
+    </a>
+  </div>
+</div>
+
+<script>
+/* ══ HERO LOAD ══ */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('hero').classList.add('loaded'), 120);
+  startCountdown();
+});
+
+/* ══ COUNTDOWN — اليوم الوطني ٢٣ سبتمبر ٢٠٢٦ ══ */
+function startCountdown() {
+  const target = new Date('2026-09-23T00:00:00+03:00');
+  function tick() {
+    const now  = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent  = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent  = '00';
+      document.getElementById('cd-secs').textContent  = '00';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000)  / 60000);
+    const s = Math.floor((diff % 60000)    / 1000);
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
+/* ══ INTEREST TOGGLE ══ */
+const interests = { sub: false, meal: false };
+
+function toggleInterest(key) {
+  interests[key] = !interests[key];
+  const item = document.getElementById('int-' + key);
+  const chk  = document.getElementById('chk-' + key);
+  item.classList.toggle('checked', interests[key]);
+  chk.style.visibility = interests[key] ? 'visible' : 'hidden';
+  validateForm();
+}
+
+function validateForm() {
+  const name  = document.getElementById('f_name').value.trim();
+  const phone = document.getElementById('f_phone').value.trim();
+  const hasInterest = interests.sub || interests.meal;
+  const btn = document.getElementById('btnSubmit');
+  btn.classList.toggle('ready', !!(name && phone && hasInterest));
+}
+
+document.getElementById('f_name').addEventListener('input', validateForm);
+document.getElementById('f_phone').addEventListener('input', validateForm);
+
+/* ══ SUBMIT ══ */
+async function submitForm() {
+  const name  = document.getElementById('f_name').value.trim();
+  const phone = document.getElementById('f_phone').value.trim();
+
+  const interestLabel =
+    interests.sub && interests.meal ? 'عروض الاشتراك + خصومات الوجبات' :
+    interests.sub  ? 'عروض الاشتراك الشهري' :
+    interests.meal ? 'خصومات الوجبات المفردة' : '';
+
+  /* ── Google Form Submit ──
+     أنشئ فورم جديد بـ ٣ حقول: الاسم، الجوال، الاهتمام
+     ثم ضع الـ entry IDs هنا                              */
+  const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfz443U35DmQsvL9Ky9pkJjb5gSjAT8fFBSrY_W1eYhJ_Prvw/formResponse';
+  const fd = new FormData();
+  fd.append('entry.1998905499', name);
+  fd.append('entry.1215641396', phone);
+  fd.append('entry.75259412',   interestLabel);
+
+  try {
+    await fetch(FORM_ACTION, { method:'POST', body:fd, mode:'no-cors' });
+  } catch(e) {}
+
+  /* ── WhatsApp رسالة للمطعم ── */
+  const waMsg = encodeURIComponent(
+    `🇸🇦 تسجيل جديد — قائمة انتظار اليوم الوطني\n\n` +
+    `👤 الاسم: ${name}\n` +
+    `📱 الجوال: ${phone}\n` +
+    `✅ الاهتمام: ${interestLabel}`
+  );
+
+  /* ── Show Success ── */
+  document.getElementById('mainScreen').style.display = 'none';
+  const succ = document.getElementById('successScreen');
+  succ.classList.add('visible');
+  document.getElementById('waLink').href = `https://wa.me/966557269256?text=${waMsg}`;
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+</script>
+</body>
+</html>
